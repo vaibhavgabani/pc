@@ -23,7 +23,25 @@ powercfg /batteryreport
 winsat formal
 ```
 
-### Step 2: View scores
+### Step 2: Run the benchmark
+```powershell
+$xmlPath = Get-ChildItem "C:\Windows\Performance\WinSAT\DataStore" -Filter "*Formal.Assessment*.WinSAT.xml" |
+Sort-Object LastWriteTime -Descending | Select-Object -First 1
+
+[xml]$xml = Get-Content $xmlPath.FullName
+
+$winSPR = $xml.WinSAT.WinSPR
+
+"CPU Score     : $($winSPR.CpuScore)"
+"Memory Score  : $($winSPR.MemoryScore)"
+"Disk Score    : $($winSPR.DiskScore)"
+"Graphics Score: $($winSPR.GraphicsScore)"
+"Gaming Score  : $($winSPR.GamingScore)"
+"System Score  : $($winSPR.SystemScore)"
+```
+
+
+### Step 3: View scores
 ```powershell
 Get-CimInstance Win32_WinSAT
 ```
