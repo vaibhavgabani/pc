@@ -1,20 +1,35 @@
-# pc
+# PC System Information Commands
 
+A collection of PowerShell commands to gather information about your Windows PC hardware and performance.
+
+## 1. 💻 Processor Information
+```powershell
 Get-CimInstance Win32_Processor | Select-Object Name, NumberOfCores, NumberOfLogicalProcessors, MaxClockSpeed
+```
 
-5. 🖥️ GPU and Display Resolution
+## 2. 🖥️ GPU and Display Resolution
+```powershell
 Get-CimInstance Win32_VideoController | Select-Object Name, AdapterRAM, CurrentHorizontalResolution, CurrentVerticalResolution
+```
 
-6. 🔋 Battery Health (Optional)
+## 3. 🔋 Battery Health (Optional)
+```powershell
 powercfg /batteryreport
+```
 
-Step 1: Run the benchmark
+## 4. ⚡ Performance Benchmark
+### Step 1: Run the benchmark
+```powershell
 winsat formal
+```
 
-Step 2: View scores
+### Step 2: View scores
+```powershell
 Get-CimInstance Win32_WinSAT
+```
 
-
-9. 📆 BIOS Version and Install Date
+## 5. 📆 BIOS Version and Install Date
+```powershell
 systeminfo | findstr /C:"BIOS Version" /C:"Original Install Date"
+```
 
